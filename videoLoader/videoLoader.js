@@ -11,9 +11,9 @@ export function videoLoader({ path }) {
 
     const videoPlane = new THREE.Mesh(geometry, material);
 
-    resolve({
+    resolve([
       videoPlane,
       video,
-    });
+    ]);
   });
 }
