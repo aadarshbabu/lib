@@ -1,14 +1,19 @@
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import * as THREE from "three";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 //const THREE = window.MINDAR.IMAGE? window.MINDAR.IMAGE.THREE: window.MINDAR.FACE.THREE;
 
 export const loadGLTF = (path) => {
-  return new Promise((resolve, reject) => {
+     const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("jsm/libs/draco/");
+  
+  return new Promise(async(resolve, reject) => {
     const loader = new GLTFLoader();
-    loader.load(path, (gltf) => {
-      resolve(gltf);
-    });
+    loader.setDRACOLoader(dracoLoader);
+    const gltf = await loader.loadAsync(path);
+    resolve(gltf)
+    
   });
 };
 
