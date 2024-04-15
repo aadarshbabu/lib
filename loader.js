@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import { FontLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/FontLoader.js";
 
 //const THREE = window.MINDAR.IMAGE? window.MINDAR.IMAGE.THREE: window.MINDAR.FACE.THREE;
 
@@ -69,4 +70,22 @@ export const loadTextures = (paths) => {
     );
   }
   return Promise.all(promises);
+};
+
+
+export const loadFont = () => {
+    return new Promise((resolve, reject) => {
+        const loader = new FontLoader();
+
+        loader.load(
+            "https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/fonts/helvetiker_regular.typeface.json",
+            (font) => {
+                resolve(font); // Resolve the promise with the loaded font
+            },
+            undefined, // Progress callback (optional)
+            (error) => {
+                reject(error); // Reject the promise with the error
+            }
+        );
+    });
 };
